@@ -1,0 +1,11 @@
+body {
+    margin-top: 20%;
+}
+
+.full {
+    background: url('http://i207.photobucket.com/albums/bb182/talitabac/india2_zpse9fcee7b.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
