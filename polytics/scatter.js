@@ -63,7 +63,7 @@ function randomData(groups, points) { //# groups,# points per group
 
 function readData() {
 	var eData = [],
-		metricas = ['PRESENCA', 'PRIVILEGIOS', 'PARTICIPACAO', 'PROCESSOS', 'OUTROS', 'QUALIDADE', 'PONTUACAO'],
+		metricas = ['QUALIDADE', 'PRIVILEGIOS', 'PROCESSOS', 'OUTROS', 'PONTUACAO', 'PARTICIPACAO', 'PRESENCA'],
 		shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'];
 	
 	d3.csv("dados_cruzados.csv", function(error, data) 
