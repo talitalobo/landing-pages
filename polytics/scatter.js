@@ -78,7 +78,7 @@ function readData() {
 						if (d[metricas[i]] != "Nao disponivel" || d[metricas[i]] != "-") {
 							eData[i].values.push({
 								y: +d[metricas[i]],
-								x: +d.DISPESA,
+								x: Math.log(+d.DISPESA),
 								size: Math.random(),
 								shape: shapes[0],
 								nome: d.CANDIDATO
