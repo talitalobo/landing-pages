@@ -23,7 +23,7 @@ summary(dados)
 Desde esse ponto notamos que há:
 
 * 8 casos onde os profissionais não são classificados entre Iniciativa Privada ou Concursado;
-* 2 casos onde o estado do profissional não foi indicado;
+* 2 casos onde o estado do profissional não foi indicado.
 
 A partir deste ponto iremos aprofundar os estudos em cada variável citada.
 
@@ -33,7 +33,7 @@ A partir deste ponto iremos aprofundar os estudos em cada variável citada.
 ```{r, echo=FALSE, warning=FALSE, fig.width=10}
 
 #falta:botar cor e ajeitar os labels que tao sobrepostos
-ggplot(dados, aes(x=dados$Cidade)) + xlab("Estado") + ylab("Quantidade") + geom_bar() 
+ggplot(dados, aes(x=dados$Cidade)) + xlab("Estado") + ylab("Quantidade") + geom_bar(fill="brown")
 #plot(dados$Cidade)
 ```
 
