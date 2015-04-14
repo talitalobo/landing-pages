@@ -60,23 +60,20 @@ E cada um desses elementos possuem suas próprias características (aesthetics).
 Então, simplesmente temos:
 
 ```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}    
-# Inicia o objeto ggplot e define a base de dados a ser usada naquele plot
-# ggplot(data=iris ...)
-
-# aes (Aesthetics) descreve como as variáveis dos dados são mapeadas para elementos visuais
-# Neste caso o eixo x representará o Tamanho da Sépala (Sepal.Length), o eixo y o Tamanho da Pétala (Petal.Length) e a forma do ponto (shape) dependerá da Espécie (Specie) da flor
-# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species))
 
 a <- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species)) 
-
-# geom_point(...) Espeficica o tipo de gráfico que estamos construindo, neste caso um gráfico de pontos ou gráfico de dispersão - scatterplot
-# Utilizando o operador '+' o gráfico é construindo adicionando camadas ao objeto ggplot criado acima
-
 a <- a + geom_point(size=4)
-
 # Plot do gráfico
 a
 ```
+
+Explicando melhor o comando acima:
+
+* a <- ... : 'Guarda' em a o objeto do plot;
+* ggplot(data=iris, ...): Inicia o objeto ggplot e define a base de dados a ser usada naquele plot;
+* aes (Aesthetics) descreve como as variáveis dos dados são mapeadas para elementos visuais. Neste caso o eixo x representará o Tamanho da Sépala (Sepal.Length), o eixo y o Tamanho da Pétala (Petal.Length) e a forma do ponto (shape) dependerá da Espécie (Specie) da flor;
+* geom_point(...) Espeficica o tipo de gráfico que estamos construindo, neste caso um gráfico de pontos ou gráfico de dispersão - scatterplot;
+* Utilizando o operador '+' pode-se adicionar camadas ao objeto ggplot criado acima;
 
 > "The first argument to ggplot() is a data frame (it must be a data frame), and its second argument is aes(). You're never going to use aes() in any other context except for inside of other ggplot2 functions, so it might be best not to think of aes() as its own function, but rather as a special way of defining data-to-aesthetic mappings."
 
