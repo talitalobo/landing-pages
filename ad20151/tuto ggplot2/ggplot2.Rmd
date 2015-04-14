@@ -1,21 +1,24 @@
-# Tutorial GGplot2
-================================================================
+---
+title: "tutorial ggplot2"
+author: "Talita L√¥bo"
+output: html_document
+---
 
 ```{r, set-options, echo=FALSE, cache=FALSE, warning=FALSE}
 library(ggplot2)
 options(width = 200)
 ```
 
-**GGplot2** È um pacote de visualizaÁ„o de dados que pode ser utilizado junto ‡ ferramenta R, neste tutorial mostraremos um pouco sobre a instalaÁ„o e exemplos utilizando esta biblioteca.
+-------------------------------
 
-Esta biblioteca È um conjunto de componentes independentes que podem ser utilizados de diferentes maneiras, construindo gr·ficos de maneira incremental. 
+**GGplot2** √© um pacote de visualiza√ß√£o de dados que pode ser utilizado junto √† ferramenta R. Esta biblioteca √© um conjunto de componentes independentes que podem ser aplicados de v√°rias formas, construindo gr√°ficos de maneira incremental. 
 
-"A general scheme for data visualization which breaks up graphs into semantic components such as scales and layers. Ggplot2 can serve as a replacement for the base graphics in R and contains a number of defaults for web and print display of common scales".
+*"A general scheme for data visualization which breaks up graphs into semantic components such as scales and layers. Ggplot2 can serve as a replacement for the base graphics in R and contains a number of defaults for web and print display of common scales".*
 
 
-## InstalaÁ„o e Carregamento do pacote
+### Instala√ß√£o e carregamento do pacote
 
-A instalaÁ„o e utilizaÁ„o da biblioteca no RStudio È feita da seguinte maneira, respectivamente (retire a #):
+A instala√ß√£o e utiliza√ß√£o da biblioteca no RStudio √© feita da seguinte maneira, respectivamente (retire a #):
 
 ```{r,cache=FALSE, warning=FALSE}
 #install.packages("ggplot2")
@@ -24,67 +27,164 @@ A instalaÁ„o e utilizaÁ„o da biblioteca no RStudio È feita da seguinte maneira, 
 ```
 
 
-## Exemplo 1 - Criando o primeiro plot
+### Criando o primeiro plot
 
-Utilizaremos uma base de dados padr„o do R, iris - para mais informaÁıes: help(iris).
+Neste primeiro momento utilizaremos uma base de dados padr√£o do R, √çris - para mais informa√ß√µes: help(iris).
 
 ```{r,cache=FALSE, warning=FALSE}
 # Carrega a base de dados em mt
 iris <- iris
 
-# Breve sum·rio sobre os dados
+# Breve sum√°rio sobre os dados
 summary(iris)
 ```
 
 
-Diferente de outras bibliotecas GGplot2 n„o È verborr·gico e a geraÁ„o dos gr·ficos utiliza o conceito de camadas. Podemos guardar gr·ficos em vari·veis, adicionar outras camadas e, finalmente, plotar o gr·fico. Ent„o, simplesmente temos:
+Diferente de outras bibliotecas **ggplot2**, n√£o √© verborr√°gico e a gera√ß√£o dos gr√°ficos utiliza o conceito de camadas. Podemos 'guardar' gr√°ficos em vari√°veis, adicionar outras camadas e, finalmente, plotar o gr√°fico. 
+Para constru√ß√£o dos plots dispomos de elementos gr√°ficos tais como:
 
-```{r,cache=FALSE, warning=FALSE}  
-# ggplot(data=iris ...) - Inicia o objeto ggplot e define a base de dados a ser usada naquele plot
-# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species)) - aes (Aesthetics) descreve como as vari·veis dos dados s„o mapeadas para elementos visuais. 
-# Neste caso o eixo x representar· o Tamanho da SÈpala (Sepal.Length), o eixo y o Tamanho da PÈtala (Petal.Length) e a forma do ponto (shape) depender· da EspÈcie (Specie) da flor.
+- Linhas
+- Segmentos de linhas
+- Pontos
+- Barras
+- Textos
+
+E cada um desses elementos possuem suas pr√≥prias caracter√≠sticas (aesthetics). Por exemplo:
+
+* Ponto - **geom_point()**
+    + shape - tri√¢ngulo, c√≠rculo, quadrado, ...
+* Linhas - **geom_line()**
+    + type - fechada, tracejada, ...
+    + weight
+
+Ent√£o, simplesmente temos:
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}    
+# Inicia o objeto ggplot e define a base de dados a ser usada naquele plot
+# ggplot(data=iris ...)
+
+# aes (Aesthetics) descreve como as vari√°veis dos dados s√£o mapeadas para elementos visuais
+# Neste caso o eixo x representar√° o Tamanho da S√©pala (Sepal.Length), o eixo y o Tamanho da P√©tala (Petal.Length) e a forma do ponto (shape) depender√° da Esp√©cie (Specie) da flor
+# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species))
 
 a <- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species)) 
 
-# geom_point(...) espeficica o tipo de gr·fico que estamos construindo, neste caso um gr·fico de pontos ou gr·fico de dispers„o - scatterplot. Utilizando o operador '+' pode-se contruir o gr·fico incrementalmente adicionando camadas ao objeto ggplot criado acima. 
+# geom_point(...) Espeficica o tipo de gr√°fico que estamos construindo, neste caso um gr√°fico de pontos ou gr√°fico de dispers√£o - scatterplot
+# Utilizando o operador '+' o gr√°fico √© construindo adicionando camadas ao objeto ggplot criado acima
 
 a <- a + geom_point(size=4)
 
-# Plot do gr·fico
+# Plot do gr√°fico
 a
+```
+
+> "The first argument to ggplot() is a data frame (it must be a data frame), and its second argument is aes(). You're never going to use aes() in any other context except for inside of other ggplot2 functions, so it might be best not to think of aes() as its own function, but rather as a special way of defining data-to-aesthetic mappings."
+
+Como incremento do gr√°fico acima podemos tamb√©m definir labels para os eixos, cores, titulo, dentre outras propriedades. 
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}    
+
+# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species)) + geom_point(size=4, aes(colour=Species)) + xlab("Tamanho da S√©pala") + ylab("Tamanho da P√©tala") + ggtitle("√çris")
+
+# Ou 
+
+# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species, col = Species)) + geom_point(size=4, aes(colour=Species)) + xlab("Tamanho da S√©pala") + ylab("Tamanho da P√©tala") + ggtitle("√çris")
+
+# No caso em que utilizemos v√°rias camadas como a 'geom_point()' √© necess√°rio que informemos novamente quem ser√£o os eixos x e y, por exemplo:
+
+ggplot(iris) + geom_point(aes(x=Sepal.Length, y=Petal.Length)) + geom_point(size=4, aes(x=Sepal.Length, y=Petal.Length, col=Species, shape=Species)) + xlab("Tamanho da S√©pala") + ylab("Tamanho da P√©tala") + ggtitle("√çris")
+
+# Ou at√© mesmo transformar vari√°veis diretamente no pr√≥prio ggplot2 (repare na escala)
+
+ggplot(iris) + geom_point(aes(x=log(Sepal.Length), y=Petal.Length*10, shape = Species, colour=Species), size=5, alpha=0.5) + xlab("Tamanho da S√©pala") + ylab("Tamanho da P√©tala") + ggtitle("√çris") 
 
 ```
 
-Como incremento do gr·fico podemos tambÈm definir labels para os eixos, cores, titulo, dentre outras propriedades. 
 
-```{r,cache=FALSE, warning=FALSE}  
+Outra forma de analisar nossos dados √© separ√°-los em gr√°ficos distintos, para tanto podemos utilizar **facets**, isso nos dar√° v√°rios plots.
 
-# ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species)) + geom_point(size=4, aes(colour=Species)) + xlab("Tamanho da SÈpala") + ylab("Tamanho da PÈtala") + ggtitle("Õris")
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
 
-# ou 
-
-ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, shape = Species, col = Species)) + geom_point(size=4, aes(colour=Species)) + xlab("Tamanho da SÈpala") + ylab("Tamanho da PÈtala") + ggtitle("Õris")
+ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species, shape=Species)) + geom_point(size=4, alpha=0.4) + facet_wrap(~Species) + xlab("Tamanho da S√©pala") + ylab("Tamanho da P√©tala") + ggtitle("Esp√©cies ~ √çris")
 
 ```
 
-
-Na construÁ„o de gr·ficos È importante identificar qual pergunta queremos responder com aquela representaÁ„o. 
-
-bar chart
-line chart  
-stacked bar chart
-histogram
+***
+Acima demonstramos apenas como se d√° a constru√ß√£o de gr√°ficos que n√£o necessariamente passam alguma informa√ß√£o.  
+*Na constru√ß√£o de gr√°ficos √© importante identificar qual pergunta queremos responder com aquela representa√ß√£o e quais informa√ß√µes da base de dados utilizar para melhor responder essa pergunta. A escolha do(s) elemento(s) geom√©trico(s) utilizados dever√° ser baseada na resposta que desejamos proporcionar.*  
+Nos exemplos abaixo veremos outros tipos de gr√°fico, como constru√≠-los e um pouco sobre a utilidade de cada um.
 
 
-Referencias:
+### Outros exemplos
+
+Utilizaremos tamb√©m uma outra base de dados padr√£o do R, Economics - para mais informa√ß√µes: help(economics).
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+economics <- economics
+```
+
+* Histograma
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+ggplot(economics, aes(psavert)) + geom_histogram(binwidth=0.2) + geom_histogram(aes(fill=..count..)) # + scale_y_reverse() # + scale_fill_gradient("Count", low="red", high="blue")
+```
+
+* Gr√°fico de linha 
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+# Geralmente uma s√©rie temporal
+ggplot(economics, aes(x=date, y=unemploy)) + geom_line() + geom_smooth() + xlab("Ano") + ylab("Desemprego (em milhares)") + ggtitle("Economics")
+```
+
+* Gr√°ficos de densidade
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+#ggplot(iris) + geom_density(aes(aes(Petal.Width, colour = Specie)), alpha = 0.6)
+
+#ggplot(I_subset, aes(Dur_msec, fill = Word))+ geom_density(position = "stack", aes(y = ..count..))
+
+#ggplot(I_subset, aes(Dur_msec, fill = Word))+ geom_density(position = "fill", aes(y = ..count..))
+```
+
+* Gr√°fico de barra
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+# Geralmente uma s√©rie temporal
+#ggplot(I_jean, aes(Word, fill = Word))+
+  # geom_bar()
+```
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+# Mescla de graficos
+#ggplot(I_subset, aes(Dur_msec, F1.n, color = Word))+ geom_point()+ geom_line()
+
+
+# All geometries begin with geom_, meaning you can get a full list using apropos().
+# apropos("^geom_")
+```
+
+
+
+-------------------------------
+
+Todas os datasets utilizados neste tutorial s√£o nativos do pr√≥prio R (iris e economics), isso significa que voc√™ pode replic√°-lo em casa e fazer as modifica√ß√µes que deseje.
+
+### Refer√™ncias:
+
 * http://ggplot2.org/
+
 * http://docs.ggplot2.org/current/ggplot.html
+
 * http://docs.ggplot2.org/current/index.html
+
 * http://en.wikipedia.org/wiki/Ggplot2
+
 * Manual completo - http://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf
+
 * http://docs.ggplot2.org/0.9.3/aes.html
+
 * **http://stackoverflow.com/questions/11657380/is-there-a-table-or-catalog-of-aesthetics-for-ggplot2**
-* http://www.ling.upenn.edu/~joseff/avml2012/#Section_1.1
+
+* **http://www.ling.upenn.edu/~joseff/avml2012/#Section_1.1**
+
 * http://blog.echen.me/2012/01/17/quick-introduction-to-ggplot2/
-* http://www.noamross.net/blog/2012/10/5/ggplot-introduction.html
-* 
