@@ -182,7 +182,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Length, color = Species))+ geom_point() + g
 ```
 
 
-> "All geometries begin with geom_, meaning you can get a full list using apropos() - apropos("^geom_")."
+> "Todas as formas geométricas começam com geom_, vocẽ pode descobrir a lista inteira usando apropos(): apropos("^geom_")."
 
 -------------------------------
 
