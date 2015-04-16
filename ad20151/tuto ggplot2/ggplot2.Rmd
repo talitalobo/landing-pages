@@ -32,7 +32,7 @@ A instalação e utilização da biblioteca no RStudio é feita da seguinte mane
 Neste primeiro momento utilizaremos uma base de dados padrão do R, Íris - para mais informações: help(iris).
 
 ```{r,cache=FALSE, warning=FALSE}
-# Carrega a base de dados em mt
+# Carrega a base de dados em iris
 iris <- iris
 
 # Breve sumário sobre os dados
@@ -40,7 +40,7 @@ summary(iris)
 ```
 
 
-Diferente de outras bibliotecas **ggplot2**, não é verborrágico e a geração dos gráficos utiliza o conceito de camadas. Podemos 'guardar' gráficos em variáveis, adicionar outras camadas e, finalmente, plotar o gráfico. 
+Diferente de outras bibliotecas **ggplot2**, não é verborrágico e a geração dos gráficos utiliza o conceito de camadas. Podemos 'guardar' gráficos em variáveis, adicionar outras camadas, modificar as já existentes e finalmente, plotar o gráfico.  
 Para construção dos plots dispomos de elementos gráficos tais como:
 
 - Linhas
@@ -70,12 +70,16 @@ a
 Explicando melhor o comando acima:
 
 * a <- ... : 'Guarda' em a o objeto do plot;
+
 * ggplot(data=iris, ...): Inicia o objeto ggplot e define a base de dados a ser usada naquele plot;
-* aes (Aesthetics) descreve como as variáveis dos dados são mapeadas para elementos visuais. Neste caso o eixo x representará o Tamanho da Sépala (Sepal.Length), o eixo y o Tamanho da Pétala (Petal.Length) e a forma do ponto (shape) dependerá da Espécie (Specie) da flor;
-* geom_point(...) Espeficica o tipo de gráfico que estamos construindo, neste caso um gráfico de pontos ou gráfico de dispersão - scatterplot;
+
+* aes (Aesthetics): Descreve como as variáveis dos dados são mapeadas para elementos visuais. Neste caso o eixo x representará o Tamanho da Sépala (Sepal.Length), o eixo y o Tamanho da Pétala (Petal.Length) e a forma do ponto (shape) dependerá da Espécie (Specie) da flor;
+
+* geom_point(...): Espeficica o tipo de gráfico que estamos construindo, neste caso um gráfico de pontos ou gráfico de dispersão - scatterplot;
+
 * Utilizando o operador '+' pode-se adicionar camadas ao objeto ggplot criado acima;
 
-> "The first argument to ggplot() is a data frame (it must be a data frame), and its second argument is aes(). You're never going to use aes() in any other context except for inside of other ggplot2 functions, so it might be best not to think of aes() as its own function, but rather as a special way of defining data-to-aesthetic mappings."
+> "The first argument to ggplot() is a data frame (it must be a data frame), and its second argument is aes(). It might be best not to think of aes() as its own function, but rather as a special way of defining data-to-aesthetic mappings."
 
 Como incremento do gráfico acima podemos também definir labels para os eixos, cores, titulo, dentre outras propriedades. 
 
@@ -91,7 +95,7 @@ Como incremento do gráfico acima podemos também definir labels para os eixos, 
 
 ggplot(iris) + geom_point(aes(x=Sepal.Length, y=Petal.Length)) + geom_point(size=4, aes(x=Sepal.Length, y=Petal.Length, col=Species, shape=Species)) + xlab("Tamanho da Sépala") + ylab("Tamanho da Pétala") + ggtitle("Íris")
 
-# Ou até mesmo transformar variáveis diretamente no próprio ggplot2 (repare na escala)
+# Podemos até mesmo transformar variáveis diretamente no próprio ggplot2 (repare na escala)
 
 ggplot(iris) + geom_point(aes(x=log(Sepal.Length), y=Petal.Length*10, shape = Species, colour=Species), size=5, alpha=0.5) + xlab("Tamanho da Sépala") + ylab("Tamanho da Pétala") + ggtitle("Íris") 
 
@@ -109,7 +113,7 @@ ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, col=Species, shape=Species)) + 
 ***
 Acima demonstramos apenas como se dá a construção de gráficos que não necessariamente passam alguma informação.  
 *Na construção de gráficos é importante identificar qual pergunta queremos responder com aquela representação e quais informações da base de dados utilizar para melhor responder essa pergunta. A escolha do(s) elemento(s) geométrico(s) utilizados deverá ser baseada na resposta que desejamos proporcionar.*  
-Nos exemplos abaixo veremos outros tipos de gráfico, como construí-los e um pouco sobre a utilidade de cada um.
+Nos exemplos abaixo veremos outros tipos de gráfico e como construí-los.
 
 
 ### Outros exemplos
@@ -123,15 +127,21 @@ economics <- economics
 * Histograma
 
 ```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
-ggplot(economics, aes(psavert)) + geom_histogram(binwidth=0.2) + geom_histogram(aes(fill=..count..)) # + scale_y_reverse() # + scale_fill_gradient("Count", low="red", high="blue")
+ggplot(economics, aes(psavert)) + geom_histogram(binwidth = diff(range(economics$psavert))/30) + geom_histogram(aes(fill=..count..)) # + scale_y_reverse() # + scale_fill_gradient("Count", low="red", high="blue")
 ```
 
 * Gráfico de linha 
 
 ```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
-# Geralmente uma série temporal
-ggplot(economics, aes(x=date, y=unemploy)) + geom_line() + geom_smooth() + xlab("Ano") + ylab("Desemprego (em milhares)") + ggtitle("Economics")
+ggplot(economics, aes(x=date, y=unemploy)) + geom_line() + xlab("Ano") + ylab("Desemprego (em milhares)") + ggtitle("Economics") # + geom_smooth() # + geom_smooth(method=lm)
 ```
+
+* Gráfico de barra
+
+```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
+ggplot(iris, aes(factor(pop))) + geom_bar()
+```
+
 
 * Gráficos de densidade
 
@@ -141,14 +151,6 @@ ggplot(economics, aes(x=date, y=unemploy)) + geom_line() + geom_smooth() + xlab(
 #ggplot(I_subset, aes(Dur_msec, fill = Word))+ geom_density(position = "stack", aes(y = ..count..))
 
 #ggplot(I_subset, aes(Dur_msec, fill = Word))+ geom_density(position = "fill", aes(y = ..count..))
-```
-
-* Gráfico de barra
-
-```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
-# Geralmente uma série temporal
-#ggplot(I_jean, aes(Word, fill = Word))+
-  # geom_bar()
 ```
 
 ```{r,cache=FALSE, warning=FALSE, fig.height= 5, fig.width=9}  
@@ -163,8 +165,6 @@ ggplot(economics, aes(x=date, y=unemploy)) + geom_line() + geom_smooth() + xlab(
 
 
 -------------------------------
-
-Todas os datasets utilizados neste tutorial são nativos do próprio R (iris e economics), isso significa que você pode replicá-lo em casa e fazer as modificações que deseje.
 
 ### Referências:
 
@@ -185,3 +185,7 @@ Todas os datasets utilizados neste tutorial são nativos do próprio R (iris e e
 * **http://www.ling.upenn.edu/~joseff/avml2012/#Section_1.1**
 
 * http://blog.echen.me/2012/01/17/quick-introduction-to-ggplot2/
+
+-------------------------------
+
+Todas os datasets utilizados neste tutorial são nativos do próprio R (iris e economics), isso significa que você pode replicá-lo em casa e fazer as modificações que deseje. :)
