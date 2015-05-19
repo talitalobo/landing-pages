@@ -66,6 +66,7 @@ img {
 </div>
 
 
+<hr />
 <p>Neste exemplo, criamos dois conjuntos que representam uma população qualquer de tamanho 100. Uma primeira, que segue a distribuição normal, e uma segunda que é igual a primeira mas com a adição de alguns outliers.</p>
 <pre class="r"><code>populacao.norm &lt;- rnorm(100)
 populacao.norm.out &lt;- c(populacao.norm, outliers)</code></pre>
@@ -77,14 +78,14 @@ nObservacoes &lt;- 25</code></pre>
 <pre class="r"><code>prop.acertos.media(populacao.norm, nAmostras, nObservacoes)</code></pre>
 <pre><code>## 
 ## FALSE  TRUE 
-## 0.026 0.974</code></pre>
+## 0.022 0.978</code></pre>
 </div>
 <div id="caso-2-calculo-da-media-para-populacao-normal-com-outliers" class="section level3">
 <h3>Caso 2: Cálculo da média para população normal com outliers</h3>
 <pre class="r"><code>prop.acertos.media(populacao.norm.out, nAmostras, nObservacoes)</code></pre>
 <pre><code>## 
 ## FALSE  TRUE 
-## 0.344 0.656</code></pre>
+## 0.358 0.642</code></pre>
 <p>A conclusão é que pra a distribuição normal, com 95% de confiança, realmente observamos a média da população em pelo menos 95% dos intervalos de confiança. Já para o caso de adicionarmos outliers à distribuição, esse resultado não é verdade.</p>
 </div>
 <div id="caso-3-calculo-da-mediana-para-populacao-normal" class="section level3">
@@ -101,6 +102,23 @@ nObservacoes &lt;- 25</code></pre>
 ## TRUE 
 ##    1</code></pre>
 <p>Para o caso da mediana, é possível concluir que com 95% de confiança, observamos a mediana da população em pelo menos 95% dos intervalos de confiança para os dois casos.</p>
+</div>
+<div id="utilizando-o-t-test" class="section level3">
+<h3>Utilizando o t-test</h3>
+<p>O teste t pode ser utilizado para:</p>
+<ul>
+<li>comparar uma amostra com uma população;</li>
+<li>comparar duas amostrar pareadas (mesmo sujeito em dois momentos diferentes);</li>
+<li>comparar duas amostras independentes,</li>
+</ul>
+<p>com o objetivo de verificar a existência entre a diferença entre a média de uma amostra (aleatória) e a média populacional.</p>
+</div>
+<div id="utilizando-o-wilcoxon-test" class="section level3">
+<h3>Utilizando o wilcoxon test</h3>
+<ol start="4" style="list-style-type: decimal">
+<li><p>fazer 1 e 2 com o t.test, avaliando se a média das amostras é significativamente diferente da média da população.</p></li>
+<li><p>fazer 1 e 2 com o wilcoxon.test</p></li>
+</ol>
 </div>
 
 

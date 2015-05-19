@@ -1,6 +1,6 @@
 ---
 title: "Intervalos de Confiança"
-author: "Análise de Dados I"
+author: "Ad1 - Allan Sales e Talita Lôbo"
 output: html_document
 ---
 
@@ -11,6 +11,7 @@ require("asbio", quietly=T, warn.conflicts=F)
 
 ```{r, echo=FALSE, warning=FALSE}
 
+# ------------------- media  
 prop.acertos.media <- function(populacao, n.Amostras, tamAmostra){
   
   amostras <- data.frame(upper = numeric(nAmostras), mean = numeric(nAmostras), lower = numeric(nAmostras))
@@ -25,6 +26,8 @@ prop.acertos.media <- function(populacao, n.Amostras, tamAmostra){
   return(prop.table(table(amostras$cont.pop.media)))
 }
 
+
+# ------------------- mediana 
 prop.acertos.mediana <- function(populacao, n.Amostras, tamAmostra){
   
   amostras <- data.frame(lower = numeric(nAmostras), upper = numeric(nAmostras))
@@ -84,3 +87,60 @@ prop.acertos.mediana(populacao.norm.out, nAmostras, nObservacoes)
 ```
 
 Para o caso da mediana, é possível concluir que com 95% de confiança, observamos a mediana da população em pelo menos 95% dos intervalos de confiança para os dois casos.
+
+
+### Utilizando o t-test
+
+O teste t pode ser utilizado para:   
+
+* comparar uma amostra com uma população;
+* comparar duas amostrar pareadas (mesmo sujeito em dois momentos diferentes);
+* comparar duas amostras independentes;   
+
+com o objetivo de verificar a existência entre a diferença entre a média de uma amostra (aleatória) e a média populacional.
+
+```{r, warning=FALSE}
+
+#populacao.norm <- rnorm(100)
+#outliers <- c(30,20,10)
+
+nAmostras <- 500
+nObservacoes <- 25
+
+# ----------------------------------------------------------
+
+amostras <- data.frame(upper = numeric(nAmostras), mean = numeric(nAmostras), lower = numeric(nAmostras))
+
+for(i in 1:nAmostras){
+  amostra <- sample(populacao.norm, nObservacoes)
+  amostras[i,] <- CI(amostra)
+}
+pop.media <- mean(populacao.norm)
+amostras$cont.pop.media <- (amostras$upper >= pop.media & amostras$lower <= pop.media)
+
+tab <- prop.table(table(amostras$cont.pop.media))
+
+
+
+# prop.acertos.media(populacao.norm, nAmostras, nObservacoes)
+#                   (populacao, n.Amostras, tamAmostra)
+
+# ----------------------------------------------------------
+
+```
+4. fazer 1 e 2 com o t.test, avaliando se a média das amostras é significativamente diferente da média da população. 
+
+### Utilizando o wilcoxon test
+```{r, warning=FALSE}
+
+
+```
+5. fazer 1 e 2 com o wilcoxon.test
+
+
+
+
+
+
+
+
