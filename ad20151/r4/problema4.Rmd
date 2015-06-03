@@ -1,0 +1,100 @@
+---
+title: "Beauty in the classroom"
+author: "Utilizando Correlação e Regressão por Talita Lôbo"
+date: "01-06-2015"
+output: html_document
+---
+
+```{r, echo=FALSE, warning=FALSE}
+data <- read.csv("evals.csv")
+library(ggplot2)
+```
+
+"Vários cursos universitários dão aos alunos a oportunidade de avaliar o curso e o professor de maneira anônima ao final do semestre. Contudo, o uso das avaliações dos alunos como um indicador da qualidade do curso e a eficácia do ensino é frequentemente criticado porque essas medidas podem refletir a influência de características não relacionadas à docência, tal como a aparência física do professor. 
+
+O artigo intitulado “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” (Hamermesh & Parker, 2005) descreve como professores que são vistos como tendo melhor aparência recebem avaliações mais altas."
+
+Nesse contexto, iremos analisar o relacionamento de diversos fatores com a avaliação feita pelos alunos. O conjunto de dados dispõe das métricas mostradas na ilustração abaixo:
+
+
+```{r, warning=FALSE, echo=FALSE}
+head(data)
+```
+
+Que significam:  
+
+* score: pontuação média da avaliação do docente - (1) muito insatisfatório, (5) excelente;  
+
+* rank: nível do professor - horista (teaching), assistente (tenure track), titular (tenure);  
+
+* ethnicity: etnia do professor - não minoria / minoria;  
+
+* gender: sexo do professor - masculino / feminino;  
+
+* language: língua da universidade frequentada pelo professor - inglês / não inglês;  
+
+* age: idade do professor;  
+
+* cls_perc_eval: percentual de alunos na turma que completaram a avaliação;  
+
+* cls_did_eval: número de alunos na turma que completaram a avaliação;  
+
+* cls_students: número de alunos total na turma;  
+
+* cls_level: nível da disciplina - introdutória / avançada;  
+
+* cls_profs: número de professores ministrando módulos na disciplina dentro da amostra - único / múltiplos;  
+
+* cls_credits: número de créditos da disciplina: um cŕedito / múltiplos créditos;  
+
+* bty_filower: avaliação da beleza do professor por aluna de nível inicial - (1) mais baixo, (10) mais alto;  
+
+* bty_fiupper: avaliação da beleza do professor por aluna de nível avançado - (1) mais baixo, (10) mais avançado;  
+
+* bty_fi2upper: avaliação da beleza do professor por segunda aluna de nível avançado - (1) mais baixo, (10) mais avançado;  
+
+* bty_m1lower: avaliação da beleza do professor por aluno de nivel inicial - (1) mais baixo, (10) mais alto;  
+
+* bty_m1upper: avaliação da beleza do professor por aluno de nivel avançado - (1) mais baixo, (10) mais alto;  
+
+* bty_m2upper: avaliação da beleza do professor por segundo aluno de nivel avançado - (1) mais baixo, (10) mais alto;  
+
+* bty_avg: m´edia da avaliaçao da beleza do professor;  
+
+* pic_outfit: roupa do professor na foto avaliada - formal / informal;  
+
+* pic_color: cor da foto avaliada - colorida / preto e branco.  
+  
+  
+Nesta análise levaremos em conta os dados deste estudo para aprender o que influencia uma avaliação positiva de um professor.
+
+-------------------------------
+
+###1. Conhecendo e filtrando os dados
+
+Primeiramente identificaremos dados que podem dar algum viés a nossa análise ou não façam sentido no nosso escopo , como por exemplo, avaliações onde o número de alunos presentes foi baixo ou o número de professores ministrando módulos na disciplina.
+
+```{r, echo=FALSE}
+
+# - eliminar quando o percentual de alunos que completaram a avaliação eh menor que 40
+# - relacionar cor e roupa com a nota
+# - 
+
+# be <- ggplot(data, aes(cls_perc_eval))
+# be + geom_boxplot()
+
+# geom_boxplot(mapping = NULL, data = NULL, stat = "boxplot", position = "dodge", outlier.colour = "black", 
+#   outlier.shape = 16, outlier.size = 2, notch = FALSE, notchwidth = 0.5, ...)
+
+fdata <- subset(data, data$cls_perc_eval >= 40)
+
+male <- subset(fdata, fdata$gender == "male")
+female <- subset(fdata, fdata$gender == "female")
+
+```
+
+
+
+
+
+
