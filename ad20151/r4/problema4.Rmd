@@ -80,11 +80,15 @@ Primeiramente identificaremos dados que podem dar algum viés a nossa análise o
 # - relacionar cor e roupa com a nota
 # - 
 
-# be <- ggplot(data, aes(cls_perc_eval))
-# be + geom_boxplot()
 
-# geom_boxplot(mapping = NULL, data = NULL, stat = "boxplot", position = "dodge", outlier.colour = "black", 
-#   outlier.shape = 16, outlier.size = 2, notch = FALSE, notchwidth = 0.5, ...)
+ggplot(data, aes(cls_perc_eval)) + geom_histogram(binwidth = diff(range(data$cls_perc_eval))/30) + geom_histogram(aes(fill=..count..))
+
+ggplot(data, aes(factor(), cls_perc_eval)) + geom_boxplot()
+
+
+
+p <- ggplot(mtcars, aes(factor(cyl), mpg))
+p + geom_boxplot()
 
 fdata <- subset(data, data$cls_perc_eval >= 40)
 
