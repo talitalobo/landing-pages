@@ -34,6 +34,11 @@ app.controller('RunMusicPtController', ['$scope', function($scope) {
 }]);
 
 app.controller('ParceirosPtController', ['$scope', function($scope) {
-    
+    $scope.labanalytics = 'Laboratório Analytics';
+    $scope.farmdias = 'Farmácia Dias';
+    $scope.korpus = 'Academia Korpus';
+    $scope.sabor = 'Sabor e Requinte Delicatessen';
+    $scope.foodjampa = 'FoodJampa';
+    $scope.francy = 'Francy Cópias e ControlP';
  }]);
 
