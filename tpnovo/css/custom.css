@@ -258,10 +258,85 @@ animation-delay: 1.6s;
 }
 
 
+
+/**** ---------------
+
+    CONTEUDO PAGINAS 
+
+----------------- ***/
+
+
 .container {
     position: absolute;
     padding-top: 18rem;
+    width: 100%;
+    border: 0;
 }
+
+.col-md-6 {
+    margin-top: 2rem;
+}
+
+.main-title {
+    background-color: #2c3e50;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+
+.title {
+    color: #fff;
+    margin-left: 5rem;
+    font-size: 1.6rem;
+}
+
+.body-title {
+    color: #fff;
+    padding-top: 1.3rem;
+    padding-bottom: 1.3rem;
+    padding-left: 1.3rem;
+    width: 70%;
+}
+
+.body-title-one {
+    background-color: firebrick;
+}
+
+.body-title-two {
+    background-color: darkslateblue;
+}
+
+.body-title-three {
+    background-color: dodgerblue;
+}
+
+
+.grade {
+    margin: 3%;    
+    margin-top: 1rem;
+}
+
+.content-box {
+    /* incluir sombra aqui */
+}
+
+.content {
+    margin-top: 2rem;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
