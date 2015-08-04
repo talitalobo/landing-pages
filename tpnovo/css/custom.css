@@ -273,14 +273,33 @@ animation-delay: 1.6s;
     border: 0;
 }
 
+.flag {
+    border-radius: 4px 4px 12px 12px;
+   -moz-border-radius: 4px 4px 12px 12px;
+   -webkit-border-radius: 4px 4px 12px 12px;
+    
+    -webkit-box-shadow:3px 4px 4px rgba(0, 0, 0, 0.3);
+       -moz-box-shadow:0 0px 4px rgba(0, 0, 0, 0.3);
+            box-shadow:3px 3px 6px rgba(0, 0, 0, 0.3);
+    
+    z-index: 3;
+    width: 5rem;
+    height: 6rem;
+    line-height: 80px;
+    color: #fff;
+    font-weight: 900;
+}
+
 .col-md-6 {
     margin-top: 2rem;
 }
 
+
 .main-title {
     background-color: #2c3e50;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    z-index: -1;
 }
 
 
@@ -325,13 +344,21 @@ animation-delay: 1.6s;
     
 }
 
+.menu-lines {
+    text-align: center;
+    margin-top: -1rem;
+    z-index:-1;
+}
 
+.menu-lines ul {
+    list-style: none;
+}
 
-
-
-
-
-
+.menu-lines li {
+    display: inline-block;
+    padding-left: 1rem; 
+    padding-right: 1rem;
+}
 
 
 
@@ -439,10 +466,31 @@ div com o nome do id
 @keyframes slide {
     100% { left: 0; }
 }
+
+
+#tv {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  margin: 20px 0;
+  background: red;
+  border-radius: 50% / 10%;
+  color: white;
+  text-align: center;
+  text-indent: .1em;
+}
+
+#tv:before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: -5%;
+  left: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+}
 */
-
-
-
 
 
 
